@@ -6,6 +6,8 @@ import DetailedPostPage from "../views/DetailedPostPage";
 import RegistrationPage from "../views/RegistrationPage";
 import LoginPage from "../views/LoginPage";
 import CreatePost from "../views/CreatePost";
+import Chat from "../views/newChat";
+import Join from "../views/join";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
             {
                 path: "/postform",
                 element: <CreatePost />,
+            },
+            {
+                path: "/chat",
+                element: <Chat />,
+            },
+            {
+                path: "/join",
+                element: <Join />,
             },
         ],
     },

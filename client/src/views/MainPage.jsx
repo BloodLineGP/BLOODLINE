@@ -27,22 +27,10 @@ const MainPage = () => {
                     Home Page
                 </Link>
                 <Link
-                    className="text-red-400 underline hover:text-blue-600"
+                    className="text-blue-400 underline hover:text-blue-600"
                     // to={"/"}
                 >
                     MY POST
-                </Link>
-                <Link
-                    className="text-red-400 underline hover:text-blue-600"
-                    // to={"/"}
-                >
-                    REQUEST PAGE
-                </Link>
-                <Link
-                    className="text-red-400 underline hover:text-blue-600"
-                    // to={"/"}
-                >
-                    DONOR PAGE
                 </Link>
                 <Link
                     className="text-blue-400 underline hover:text-blue-600"
@@ -55,6 +43,18 @@ const MainPage = () => {
                     onClick={handleLogout}
                 >
                     Log Out
+                </Link>
+                <Link
+                    className="text-blue-400 underline hover:text-blue-600"
+                    // to={"/"}
+                >
+                    REQUEST PAGE
+                </Link>
+                <Link
+                    className="text-blue-400 underline hover:text-blue-600"
+                    // to={"/"}
+                >
+                    DONOR PAGE
                 </Link>
             </nav>
             <Outlet />
