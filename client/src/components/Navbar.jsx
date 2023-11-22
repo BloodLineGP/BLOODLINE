@@ -42,25 +42,15 @@ const Navbar = () => {
         <Link className="text-white" to={"/postform"}>
           Create Post
         </Link>
-        <Link
-          className="text-white"
-          // to={"/"}
-        >
+        <Link className="text-white" to={"/posts/mypost"}>
           My Post
         </Link>
-        <Link
-          className="text-white"
-          // to={"/"}
-        >
+        <Link className="text-white" to={"/posts/request"}>
           Request Page
         </Link>
-        <Link
-          className="text-white"
-          // to={"/"}
-        >
+        <Link className="text-white" to={"/posts/donor"}>
           Donor Page
         </Link>
-
         <p className="cursor-pointer text-white" onClick={handleLogout}>
           Logout
         </p>

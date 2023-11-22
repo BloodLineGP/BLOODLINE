@@ -129,6 +129,79 @@ class postController {
       next(err);
     }
   }
+  static async readMyPosts(req, res, next) {
+    try {
+      const { id, username } = req.login; //ini asal dari AUTHENTICATION
+
+      const readPost = await Post.findAll({
+        where: {
+          UserId: id,
+        },
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+        ],
+      });
+      res.status(200).json({
+        message: `Post retrieved`,
+        data: readPost,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+  static async readRequestPosts(req, res, next) {
+    try {
+      const { id, username } = req.login; //ini asal dari AUTHENTICATION
+      const readPost = await Post.findAll({
+        where: {
+          postType: "Request",
+        },
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+        ],
+      });
+      res.status(200).json({
+        message: `Post retrieved`,
+        data: readPost,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+  static async readDonorPosts(req, res, next) {
+    try {
+      const { id, username } = req.login; //ini asal dari AUTHENTICATION
+      const readPost = await Post.findAll({
+        where: {
+          postType: "Volunteer",
+        },
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+        ],
+      });
+      res.status(200).json({
+        message: `Post retrieved`,
+        data: readPost,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = postController;

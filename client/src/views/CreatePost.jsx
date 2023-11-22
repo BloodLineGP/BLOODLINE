@@ -91,7 +91,7 @@ const CreatePost = () => {
         <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
             <div>
-              <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+              <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 border-2 border-gray-300 hover:shadow-lg">
                 <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                   <div className="text-gray-600">
                     <p className="font-medium text-lg">Personal Details</p>
@@ -106,9 +106,10 @@ const CreatePost = () => {
                           type="text"
                           name="name"
                           id="name"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           defaultValue={name}
                           onChange={nameChangeHandler}
+                          autoComplete="off"
                         />
                       </div>
 
@@ -118,16 +119,17 @@ const CreatePost = () => {
                           type="text"
                           name="description"
                           id="description"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           defaultValue={description}
                           onChange={descriptionChangeHandler}
+                          autoComplete="off"
                         />
                       </div>
 
                       <div className="md:col-span-3">
                         <label for="bloodType">Blood Type</label>
                         <select
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           id="bloodType"
                           onChange={bloodTypeChangeHandler}
                         >
@@ -146,14 +148,15 @@ const CreatePost = () => {
                       </div>
 
                       <div className="md:col-span-3">
-                        <label for="location">Location(Hospital)</label>
+                        <label for="location">Location (Hospital)</label>
                         <input
                           type="text"
                           name="location"
                           id="location"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           defaultValue={location}
                           onChange={locationChangeHandler}
+                          autoComplete="off"
                         />
                       </div>
 
@@ -163,7 +166,7 @@ const CreatePost = () => {
                           type="text"
                           name="contact"
                           id="contact"
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           defaultValue={contact}
                           onChange={contactChangeHandler}
                         />
@@ -176,15 +179,13 @@ const CreatePost = () => {
                             onChange={postTypeChangeHandler}
                             name="postType"
                             id="postType"
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           >
                             <option defaultValue="" selected hidden>
                               -- Select Type --
                             </option>
-                            <option defaultValue="RECIPIENT">
-                              AS RECIPIENT
-                            </option>
-                            <option defaultValue="DONOR">AS DONOR</option>
+                            <option defaultValue="Request">AS RECIPIENT</option>
+                            <option defaultValue="Volunteer">AS DONOR</option>
                           </select>
                         </div>
                       </div>
@@ -196,7 +197,7 @@ const CreatePost = () => {
                             onChange={statusChangeHandler}
                             name="status"
                             id="status"
-                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                            className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           >
                             <option defaultValue="" selected hidden>
                               -- Select Status --
@@ -211,7 +212,7 @@ const CreatePost = () => {
 
                       <div className="md:col-span-5 text-right">
                         <div className="inline-flex items-end">
-                          <button className="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                          <button className="cursor-pointer bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                             Submit
                           </button>
                         </div>

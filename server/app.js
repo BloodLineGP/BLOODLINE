@@ -28,6 +28,9 @@ app.post("/google-login", userController.googleLogin); //login
 app.use(authentication);
 
 app.get("/posts", postController.readPosts); // showing all posts available
+app.get("/posts/mypost", postController.readMyPosts);
+app.get("/posts/request", postController.readRequestPosts);
+app.get("/posts/donor", postController.readDonorPosts);
 app.get("/posts/:id", postController.postDetail); //showing post detail
 app.post("/posts", postController.createPost); //creating new post
 

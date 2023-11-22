@@ -6,6 +6,9 @@ import DetailedPostPage from "../views/DetailedPostPage";
 import RegistrationPage from "../views/RegistrationPage";
 import LoginPage from "../views/LoginPage";
 import CreatePost from "../views/CreatePost";
+import MyPostPage from "../views/MyPostPage";
+import RequestPostPage from "../views/RequestPostPage";
+import DonorPostPage from "../views/DonorPostPage";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +61,18 @@ const router = createBrowserRouter([
       {
         path: "/postform",
         element: <CreatePost />,
+      },
+      {
+        path: "/posts/mypost",
+        element: <MyPostPage />,
+      },
+      {
+        path: "/posts/request",
+        element: <RequestPostPage />,
+      },
+      {
+        path: "/posts/donor",
+        element: <DonorPostPage />,
       },
     ],
   },
