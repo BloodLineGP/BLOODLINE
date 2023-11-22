@@ -1,33 +1,36 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { url } from "../configs/config";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPost } from "../features/post/post-slice";
 
 const MainContent = () => {
-  const [post, setPost] = useState([]);
+  // const [post, setPost] = useState([]);
+  // const fetchPost = async () => {
+  //   try {
+  //     const { data } = await axios.get(`${url}/posts`, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.authorization}`,
+  //       },
+  //     });
 
-  const fetchPost = async () => {
-    try {
-      const { data } = await axios.get(`${url}/posts`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.authorization}`,
-        },
-      });
+  //     setPost(data.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-      setPost(data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { posts, loading, error } = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     //otomatis, lifecycle seperti hook tidak perlu di panggil.ini adalah mounting
-    fetchPost();
+    dispatch(fetchPost());
+    // fetchPost();
   }, []);
 
   return (
     <div className="pt-10 px-24 flex flex-row flex-wrap bg-white justify-center">
-      {post.map((el) => {
+      {posts.map((el) => {
         return (
           <div className="m-2 border-2 border-gray-500 shadow bg-white rounded w-1/3 p-4 shadow transition-transform duration-300 hover:border-red-500">
             <div className="flex">

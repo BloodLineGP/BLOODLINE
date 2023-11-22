@@ -37,7 +37,7 @@ const LoginPage = () => {
       navigate("/posts");
       Swal.fire({
         icon: "success",
-        title: "Welcome to BloodLine",
+        title: `Welcome ${username} !`,
         showConfirmButton: false,
         timer: 1500,
       });
@@ -166,6 +166,5 @@ const LoginPage = () => {
       </section>
     </>
   );
-
 };
 export default LoginPage;
