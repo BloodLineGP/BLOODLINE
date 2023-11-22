@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { url } from "../configs/config";
 
-const MainContent = () => {
+const DonorPostPage = () => {
   const [post, setPost] = useState([]);
 
   const fetchPost = async () => {
     try {
-      const { data } = await axios.get(`${url}/posts`, {
+      const { data } = await axios.get(`${url}/posts/donor`, {
         headers: {
           Authorization: `Bearer ${localStorage.authorization}`,
         },
@@ -77,4 +77,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+export default DonorPostPage;

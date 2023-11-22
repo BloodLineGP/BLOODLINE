@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import io from "socket.io-client";
@@ -12,10 +13,12 @@ import Messages from "./Messages";
 let socket;
 
 const DetailedPostPage = () => {
+
     const { id } = useParams();
     const server_url = "http://localhost:3000";
 
     const [post, setPost] = useState({});
+
     const [name, setName] = useState(localStorage.loggedUser);
     const [user, setUser] = useState("");
     const [message, setMessage] = useState("");
@@ -51,10 +54,10 @@ const DetailedPostPage = () => {
     };
 
     //useeffect ambil payload login user
-
     useEffect(() => {
         fetchPostById();
     }, [id]);
+
 
     const sendMessage = (event) => {
         event.preventDefault();
@@ -85,35 +88,42 @@ const DetailedPostPage = () => {
                         <div className="text-gray-600">
                             <p className="text-lg">Full Name: {post.name}</p>
                         </div>
+
                         <div className="text-gray-600">
                             <p className=" text-lg">
                                 Description: {post.description}
                             </p>
                         </div>
+
                         <div className="text-gray-600">
                             <p className=" text-lg">
                                 BloodType: {post.bloodType}
                             </p>
                         </div>
+
                         <div className="text-gray-600">
                             <p className=" text-lg">Status:{post.status}</p>
                         </div>
+
                         <div className="text-gray-600">
                             <p className=" text-lg">
                                 Published Date:{post.publishDate}
                             </p>
                         </div>
+
                         <div className="text-gray-600">
                             <p className=" text-lg">Location:{post.location}</p>
                         </div>
                         <div className="text-gray-600">
                             <p className=" text-lg">Contact:{post.contact}</p>
                         </div>
+
                         <div className="text-gray-600">
                             <p className=" text-lg">
                                 Post Type:{post.postType}
                             </p>
                         </div>
+
 
                         <button
                             className="float-left bg-blue-400 rounded px-2 py-1 text-white"
@@ -159,6 +169,7 @@ const DetailedPostPage = () => {
                         setMessage={setMessage}
                         sendMessage={sendMessage}
                     />
+
                 </div>
             </div>
         </>

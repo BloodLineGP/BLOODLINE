@@ -1,19 +1,29 @@
 const cors = require("cors");
 const express = require("express");
+
+const { createServer } = require("node:http");
+const errorHandler = require("./middlewares/errorHandler");
+
+const { Server } = require("socket.io");
+
 const socketio = require("socket.io");
 const http = require("http");
-const port = 3000;
 
-const errorHandler = require("./middlewares/errorHandler");
 
 const userController = require("./controller/userController");
 const postController = require("./controller/postController");
 const authentication = require("./middlewares/authentication");
 const authorization = require("./middlewares/authorization");
 
+const { time } = require("node:console");
+
+const port = 3000;
+
+
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, { cors: { origin: "*" } });
+
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -27,6 +37,10 @@ app.post("/google-login", userController.googleLogin); //login
 app.use(authentication);
 
 app.get("/posts", postController.readPosts); // showing all posts available
+
+app.get("/posts/mypost", postController.readMyPosts);
+app.get("/posts/request", postController.readRequestPosts);
+app.get("/posts/donor", postController.readDonorPosts);
 app.get("/posts/:id", postController.postDetail); //showing post detail
 app.post("/posts", postController.createPost); //creating new post
 
@@ -35,6 +49,7 @@ app.put("/posts/:id", authorization, postController.updatePost); //updating post
 app.delete("/posts/:id", authorization, postController.deletePost);
 
 io.on("connection", (socket) => {
+
     console.log("a user connected", socket.id);
 
     socket.on("join", ({ name, id }, callback) => {
@@ -76,6 +91,7 @@ io.on("connection", (socket) => {
 
 server.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
+
 });
 app.use(errorHandler);
 module.exports = app;
