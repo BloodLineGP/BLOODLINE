@@ -39,6 +39,7 @@ const LoginPage = () => {
             console.log(data.access_token);
 
             localStorage.setItem("token", data.access_token);
+            localStorage.setItem("loggedUser", data.username);
             navigate("/posts");
         } catch (err) {
             console.log(err);

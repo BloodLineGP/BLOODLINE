@@ -1,20 +1,19 @@
 const cors = require("cors");
 const express = require("express");
-const { createServer } = require("node:http");
-const errorHandler = require("./middlewares/errorHandler");
+const socketio = require("socket.io");
+const http = require("http");
+const port = 3000;
 
-const { Server } = require("socket.io");
+const errorHandler = require("./middlewares/errorHandler");
 
 const userController = require("./controller/userController");
 const postController = require("./controller/postController");
 const authentication = require("./middlewares/authentication");
 const authorization = require("./middlewares/authorization");
-const { time } = require("node:console");
 
 const app = express();
-const server = createServer(app);
-const io = new Server(server, { cors: { origin: "*" } });
-const port = 3000;
+const server = http.createServer(app);
+const io = socketio(server, { cors: { origin: "*" } });
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -36,28 +35,42 @@ app.put("/posts/:id", authorization, postController.updatePost); //updating post
 app.delete("/posts/:id", authorization, postController.deletePost);
 
 io.on("connection", (socket) => {
-    console.log(`a user connected: ${socket.id}`);
-    socket.on("an_event", (msg) => {
-        console.log("an_event" + msg);
-    });
+    console.log("a user connected", socket.id);
 
-    socket.on("an_event_with_response", (data) => {
-        console.log("an_event" + data);
+    socket.on("join", ({ name, id }, callback) => {
+        console.log("a user connected", socket.id, name);
 
-        socket.emit("response_from_server", {
-            len: data.length,
-            randNumber: Math.ceil(Math.random() * 100),
+        const room = id;
+        console.log(name, id, `Socket On Join`);
+
+        socket.emit("message", {
+            user: "admin",
+            text: `You are requesting to Chat with ${name}`,
         });
+        socket.broadcast.to(console.log(`welcome to room post${id}`));
+        socket.join(id);
+
+        socket.to(room).emit("roomData", { users: `Room ${id}` });
+
+        callback();
     });
 
-    let counter = 1;
-    const timer = setInterval(() => {
-        counter++;
-    }, 1000);
+    socket.on("sendMessage", ({ message, id, name }) => {
+        // const user = socket.id;
+
+        console.log(message, `INI DARI BACKEND MSG`, id, name);
+        socket.to(id).emit("message", { text: message, user: name });
+    });
 
     socket.on("disconnect", () => {
-        console.log(`User disconnect ${socket.id}`);
-        clearInterval(timer);
+        const user = socket.id;
+        console.log("user left");
+        if (user) {
+            socket.to(user).emit("message", {
+                user: "admin",
+                text: `${user} is offline`,
+            });
+        }
     });
 });
 
