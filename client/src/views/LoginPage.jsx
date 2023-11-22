@@ -1,6 +1,7 @@
 import axios from "axios"; //importing axios for backend use
 import { GoogleLogin } from "@react-oauth/google";
 import { useState } from "react"; //import state
+
 import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import Toastify from "toastify-js";
@@ -165,5 +166,6 @@ const LoginPage = () => {
       </section>
     </>
   );
+
 };
 export default LoginPage;

@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import Swal from "sweetalert2";
 import Toastify from "toastify-js";
 import { useState } from "react";
@@ -227,6 +228,7 @@ const CreatePost = () => {
       </form>
     </>
   );
+
 };
 
 export default CreatePost;

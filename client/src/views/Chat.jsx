@@ -2,7 +2,9 @@ import { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 import { axios } from "axios";
 const server_url = "http://localhost:3000";
-function Chat() {
+
+function Chats() {
+
     const [data, setData] = useState("");
 
     //hhtp pull
@@ -89,4 +91,6 @@ function Chat() {
     );
 }
 
-export default Chat;
+
+export default Chats;
+

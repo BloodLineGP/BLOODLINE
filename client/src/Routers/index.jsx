@@ -1,5 +1,7 @@
 import React from "react";
+
 import { createBrowserRouter, redirect } from "react-router-dom";
+
 import MainPage from "../views/MainPage";
 import MainContent from "../views/MainContent";
 import DetailedPostPage from "../views/DetailedPostPage";
@@ -9,6 +11,8 @@ import CreatePost from "../views/CreatePost";
 import MyPostPage from "../views/MyPostPage";
 import RequestPostPage from "../views/RequestPostPage";
 import DonorPostPage from "../views/DonorPostPage";
+import Chat from "../views/newChat";
+import Join from "../views/join";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +77,14 @@ const router = createBrowserRouter([
       {
         path: "/posts/donor",
         element: <DonorPostPage />,
+      },
+      {
+        path: "/chat",
+        element: <Chat />,
+      },
+      {
+        path: "/join",
+        element: <Join />,
       },
     ],
   },

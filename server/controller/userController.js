@@ -3,6 +3,7 @@ const { compareHash } = require("../helper/bcrypt");
 const { genToken, decode } = require("../helper/jwt");
 const { OAuth2Client } = require("google-auth-library");
 class userController {
+
   static async register(req, res, next) {
     try {
       const { username, password, birthdate } = req.body;
@@ -85,6 +86,7 @@ class userController {
       console.log(error);
     }
   }
+
 }
 
 module.exports = userController;

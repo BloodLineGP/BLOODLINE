@@ -1,6 +1,7 @@
 const { User, Post } = require("../models/index");
 
 class postController {
+
   static async readPosts(req, res, next) {
     try {
       const { id, username } = req.login; //ini asal dari AUTHENTICATION
@@ -202,6 +203,7 @@ class postController {
       next(err);
     }
   }
+
 }
 
 module.exports = postController;
