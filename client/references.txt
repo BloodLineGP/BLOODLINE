@@ -47,3 +47,20 @@
                 </div>
             </div>
 
+
+
+
+            <div className="outerContainer">
+                <div className="container">
+                    <InfoBar name={name} />
+
+                    <Messages messages={messages} name={user} id={id} />
+
+                    <Input
+                        message={message}
+                        setMessage={setMessage}
+                        sendMessage={sendMessage}
+                    />
+                </div>
+            </div>
+            <TextContainer users={post.name} />
