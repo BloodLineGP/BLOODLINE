@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import io from "socket.io-client";
 import axios from "axios";
 
@@ -8,7 +8,6 @@ import "../css/chat.css";
 import InfoBar from "./InfoBar";
 import Input from "./Input";
 import Messages from "./Messages";
-import TextContainer from "./TextContainer";
 
 let socket;
 
@@ -17,20 +16,25 @@ const DetailedPostPage = () => {
     const server_url = "http://localhost:3000";
 
     const [post, setPost] = useState({});
-    const [name, setName] = useState("");
+    const [name, setName] = useState(localStorage.loggedUser);
+    const [user, setUser] = useState("");
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         socket = io(server_url);
         // return socket.emit("disconnect");
+        console.log(localStorage.loggedUser, `USER YG LOGIN`);
     }, [server_url, id]);
 
     useEffect(() => {
-        socket.on("message", (message) => {
-            setMessages([...messages, message]);
+        console.log(`SSSSSSSSS`);
+        socket.on("message", ({ text, user }) => {
+            console.log(text, `INI TEXT dari FE`, user);
+            setMessages([...messages, text]);
+            setUser(user);
         });
-    }, [messages]);
+    }, [message]);
 
     const fetchPostById = async () => {
         try {
@@ -46,25 +50,35 @@ const DetailedPostPage = () => {
         }
     };
 
+    //useeffect ambil payload login user
+
     useEffect(() => {
         fetchPostById();
     }, [id]);
 
     const sendMessage = (event) => {
         event.preventDefault();
+        console.log(message, id, name);
         if (message) {
-            socket.emit("sendMessage", message, () => setMessage(""));
+            socket.emit("sendMessage", { message, id, name }, () =>
+                setMessage("")
+            );
         }
+        socket.on("message", (data) => {
+            console.log(data, "<<<<< ");
+        });
     };
-    console.log(message, messages);
 
     return (
         <>
             <div className="min-h-screen p-6 bg-gray-300 flex space-x-4 flex-cols">
                 <div className="text-left flex items-stretch bg-gray-100 rounded shadow-lg p-4 px-4 md:p-8 mb-6  max-w-lg">
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-1 self-auto">
-                        <div className="text-gray-600" key={post.id}>
-                            <p className="font-medium text-lg text-red-500">
+                        <div className="text-gray-600">
+                            <p
+                                key={post.id}
+                                className="font-medium text-lg text-red-500"
+                            >
                                 Post Details {post.name}
                             </p>
                         </div>
@@ -101,31 +115,24 @@ const DetailedPostPage = () => {
                             </p>
                         </div>
 
-                        <Link to={" "}>
-                            <button className="float-left bg-blue-400 rounded px-2 py-1 text-white">
-                                Chat Now
-                            </button>
-                        </Link>
-
                         <button
+                            className="float-left bg-blue-400 rounded px-2 py-1 text-white"
                             onClick={() => {
-                                socket.emit("join", { name }, () => {});
+                                socket.emit("join", { name, id }, () => {});
                             }}
-                            className={"button mt-20"}
-                            type="submit"
                         >
-                            CHAT WITH THIS USER
+                            Chat Now
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div className="joinOuterContainer">
+            {/* <div className="joinOuterContainer">
                 <div className="joinInnerContainer">
-                    <h1 className="heading">Join</h1>
+                    <h1 className="heading">chat</h1>
                     <div>
                         <input
-                            placeholder="Name"
+                            placeholder={post.name}
                             className="joinInput"
                             type="text"
                             onChange={(event) => setName(event.target.value)}
@@ -133,7 +140,7 @@ const DetailedPostPage = () => {
                     </div>
                     <button
                         onClick={() => {
-                            socket.emit("join", { name }, () => {});
+                            socket.emit("join", { name, id }, () => {});
                         }}
                         className={"button mt-20"}
                         type="submit"
@@ -141,12 +148,12 @@ const DetailedPostPage = () => {
                         CHAT WITH THIS USER
                     </button>
                 </div>
-            </div>
+            </div> */}
 
             <div className="outerContainer">
                 <div className="container">
                     <InfoBar name={name} />
-                    <Messages messages={messages} name={name} />
+                    <Messages messages={messages} name={user} id={id} />
                     <Input
                         message={message}
                         setMessage={setMessage}
@@ -154,7 +161,6 @@ const DetailedPostPage = () => {
                     />
                 </div>
             </div>
-            <TextContainer users={post.name} />
         </>
     );
 };

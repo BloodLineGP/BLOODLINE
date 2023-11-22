@@ -37,34 +37,36 @@ app.delete("/posts/:id", authorization, postController.deletePost);
 io.on("connection", (socket) => {
     console.log("a user connected", socket.id);
 
-    socket.on("join", ({ name }, callback) => {
-        console.log(name);
+    socket.on("join", ({ name, id }, callback) => {
+        console.log("a user connected", socket.id, name);
+
+        const room = id;
+        console.log(name, id, `Socket On Join`);
 
         socket.emit("message", {
             user: "admin",
             text: `You are requesting to Chat with ${name}`,
         });
-        socket.broadcast.to(console.log("welcome"));
-        socket.join(name);
+        socket.broadcast.to(console.log(`welcome to room post${id}`));
+        socket.join(id);
 
-        io.to(name).emit("roomData", { users: `${name} is in room` });
+        socket.to(room).emit("roomData", { users: `Room ${id}` });
 
         callback();
     });
 
-    socket.on("sendMessage", (message, callback) => {
-        const user = socket.id;
+    socket.on("sendMessage", ({ message, id, name }) => {
+        // const user = socket.id;
 
-        io.to(user).emit("message", { text: message });
-
-        callback();
+        console.log(message, `INI DARI BACKEND MSG`, id, name);
+        socket.to(id).emit("message", { text: message, user: name });
     });
 
     socket.on("disconnect", () => {
         const user = socket.id;
         console.log("user left");
         if (user) {
-            io.to(user).emit("message", {
+            socket.to(user).emit("message", {
                 user: "admin",
                 text: `${user} is offline`,
             });

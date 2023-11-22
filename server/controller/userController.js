@@ -48,6 +48,7 @@ class userController {
             res.status(200).json({
                 message: "Access Granted",
                 access_token,
+                username,
             });
         } catch (err) {
             console.log(err);

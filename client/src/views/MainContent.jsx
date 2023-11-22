@@ -29,7 +29,10 @@ const MainContent = () => {
         <div className="flex space-y-5  flex-row flex-wrap">
             {post.map((el) => {
                 return (
-                    <div className="bg-white rounded w-2/3 lg:w-1/2 xl:w-1/3 p-4 shadow">
+                    <div
+                        className="bg-white rounded w-2/3 lg:w-1/2 xl:w-1/3 p-4 shadow"
+                        key={el.id}
+                    >
                         <div className="flex">
                             <div className="w-2/3">
                                 <h1 className="font-semibold">{el.postType}</h1>
