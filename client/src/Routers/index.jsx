@@ -8,9 +8,11 @@ import DetailedPostPage from "../views/DetailedPostPage";
 import RegistrationPage from "../views/RegistrationPage";
 import LoginPage from "../views/LoginPage";
 import CreatePost from "../views/CreatePost";
+
 import MyPostPage from "../views/MyPostPage";
 import RequestPostPage from "../views/RequestPostPage";
 import DonorPostPage from "../views/DonorPostPage";
+
 import Chat from "../views/newChat";
 import Join from "../views/join";
 
@@ -44,6 +46,7 @@ const router = createBrowserRouter([
       }
       return null;
     },
+
   },
   {
     element: <MainPage />,
