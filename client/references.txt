@@ -19,4 +19,31 @@
                             <button type="submit">Send</button>
                         </form>
                     </div>
+
                 </div>
+
+
+
+                    <div className="joinOuterContainer">
+                <div className="joinInnerContainer">
+                    <h1 className="heading">This post is published by</h1>
+                    <div>
+                        <input
+                            placeholder={post.name}
+                            className="joinInput"
+                            type="text"
+                            onChange={(event) => setName(post.UserId)}
+                        />
+                    </div>
+                    <button
+                        onClick={() => {
+                            socket.emit("join", { name }, () => {});
+                        }}
+                        className={"button mt-20"}
+                        type="submit"
+                    >
+                        CHAT WITH THIS USER
+                    </button>
+                </div>
+            </div>
+

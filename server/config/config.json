@@ -1,14 +1,18 @@
 {
   "development": {
     "username": "postgres",
-    "password": null,
+
+    "password": "postgres",
+
     "database": "BloodLine",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": null,
+
+    "password": "postgres",
+
     "database": "BloodLineTestingEnvironment",
     "host": "127.0.0.1",
     "dialect": "postgres",
@@ -16,7 +20,9 @@
   },
   "production": {
     "username": "postgres",
-    "password": null,
+
+    "password": "postgres",
+
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "postgres"
