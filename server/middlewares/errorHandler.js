@@ -72,6 +72,11 @@ const errorHandler = (err, req, res, next) => {
     message = "Data not found";
   }
 
+  if (err.message == "Post not found") {
+    status = 404;
+    message = "Post not found";
+  }
+
   res.status(status).json({ message });
 };
 
