@@ -1,116 +1,119 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-    Container,
+    Navbar,
+    Collapse,
     Typography,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-    TextField,
+    IconButton,
     Button,
-    Grid,
-} from "@mui/material";
+} from "@material-tailwind/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-const BloodDonorRecipientForm = () => {
-    const [userType, setUserType] = useState("donor"); // Default to donor
-    const [formData, setFormData] = useState({
-        name: "",
-        bloodType: "",
-        lastDonationDate: "",
-        hospitalName: "",
-    });
+function NavList() {
+    return (
+        <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-medium"
+            >
+                <a
+                    href="#"
+                    className="flex items-center hover:text-blue-500 transition-colors"
+                >
+                    Pages
+                </a>
+                <Button />
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-medium"
+            >
+                <a
+                    href="#"
+                    className="flex items-center hover:text-blue-500 transition-colors"
+                >
+                    Account
+                </a>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-medium"
+            >
+                <a
+                    href="#"
+                    className="flex items-center hover:text-blue-500 transition-colors"
+                >
+                    Blocks
+                </a>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-medium"
+            >
+                <a
+                    href="#"
+                    className="flex items-center hover:text-blue-500 transition-colors"
+                >
+                    Docs
+                </a>
+            </Typography>
+        </ul>
+    );
+}
 
-    const handleUserTypeChange = (event) => {
-        setUserType(event.target.value);
-    };
+export function NavbarSimple() {
+    const [openNav, setOpenNav] = React.useState(false);
 
-    const handleChange = (event) => {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value,
-        });
-    };
+    const handleWindowResize = () =>
+        window.innerWidth >= 960 && setOpenNav(false);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Add your form submission logic here
-        console.log("Form submitted:", userType, formData);
-        // You may want to make an API call to handle form submission
-    };
+    React.useEffect(() => {
+        window.addEventListener("resize", handleWindowResize);
+
+        return () => {
+            window.removeEventListener("resize", handleWindowResize);
+        };
+    }, []);
 
     return (
-        <Container maxWidth="sm">
-            <Typography variant="h4" align="center" gutterBottom>
-                Blood Donor and Recipient App
-            </Typography>
-            <form onSubmit={handleSubmit}>
-                <FormControl fullWidth margin="normal">
-                    <InputLabel>User Type</InputLabel>
-                    <Select value={userType} onChange={handleUserTypeChange}>
-                        <MenuItem value="donor">Donor</MenuItem>
-                        <MenuItem value="recipient">Recipient</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <TextField
-                    fullWidth
-                    label="Name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    margin="normal"
-                    required
-                />
-
-                <TextField
-                    fullWidth
-                    label="Blood Type"
-                    name="bloodType"
-                    value={formData.bloodType}
-                    onChange={handleChange}
-                    margin="normal"
-                    required
-                />
-
-                {userType === "donor" && (
-                    <TextField
-                        fullWidth
-                        label="Last Donation Date"
-                        type="date"
-                        name="lastDonationDate"
-                        value={formData.lastDonationDate}
-                        onChange={handleChange}
-                        margin="normal"
-                        required
-                    />
-                )}
-
-                {userType === "recipient" && (
-                    <TextField
-                        fullWidth
-                        label="Hospital Name"
-                        name="hospitalName"
-                        value={formData.hospitalName}
-                        onChange={handleChange}
-                        margin="normal"
-                        required
-                    />
-                )}
-
-                <Grid container justifyContent="center" spacing={2}>
-                    <Grid item>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                        >
-                            Submit
-                        </Button>
-                    </Grid>
-                </Grid>
-            </form>
-        </Container>
+        <Navbar className="mx-auto max-w-screen-xl px-6 py-3">
+            <div className="flex items-center justify-between text-blue-gray-900">
+                <Typography
+                    as="a"
+                    href="#"
+                    variant="h6"
+                    className="mr-4 cursor-pointer py-1.5"
+                >
+                    Material Tailwind
+                </Typography>
+                <div className="hidden lg:block">
+                    <NavList />
+                </div>
+                <IconButton
+                    variant="text"
+                    className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+                    ripple={false}
+                    onClick={() => setOpenNav(!openNav)}
+                >
+                    {openNav ? (
+                        <XMarkIcon className="h-6 w-6" strokeWidth={2} />
+                    ) : (
+                        <Bars3Icon className="h-6 w-6" strokeWidth={2} />
+                    )}
+                </IconButton>
+            </div>
+            <Collapse open={openNav}>
+                <NavList />
+            </Collapse>
+        </Navbar>
     );
-};
+}
 
-export default BloodDonorRecipientForm;
+export default NavList;

@@ -12,8 +12,7 @@ import CreatePost from "../views/CreatePost";
 import MyPostPage from "../views/MyPostPage";
 import RequestPostPage from "../views/RequestPostPage";
 import DonorPostPage from "../views/DonorPostPage";
-import BloodDonorRecipientForm from "../views/Chat";
-import Chat from "../views/newChat";
+
 import Join from "../views/join";
 
 const router = createBrowserRouter([
@@ -80,10 +79,7 @@ const router = createBrowserRouter([
                 path: "/posts/donor",
                 element: <DonorPostPage />,
             },
-            {
-                path: "/chat",
-                element: <BloodDonorRecipientForm />,
-            },
+
             {
                 path: "/join",
                 element: <Join />,
