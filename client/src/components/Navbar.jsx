@@ -35,6 +35,9 @@ const Navbar = () => {
                 <Link to={"/posts"} className="text-white">
                     BLOODLINE
                 </Link>
+                <p className="text-white-">
+                    Welcome, {localStorage.loggedUser}
+                </p>
 
                 <Link className="text-white" to={"/posts"}>
                     Home Page
