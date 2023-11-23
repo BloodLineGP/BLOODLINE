@@ -171,6 +171,7 @@ const LoginPage = () => {
                         </div>
                     </div>
                 </div>
+
             </section>
         </>
     );

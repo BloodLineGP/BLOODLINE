@@ -1,34 +1,35 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { url } from "../configs/config";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMyPost } from "../features/post/myPost-slice";
 
 const MyPostPage = () => {
-  const [post, setPost] = useState([]);
+  // const [post, setPost] = useState([]);
+  // const fetchPost = async () => {
+  //   try {
+  //     console.log("MASUK SINI");
+  //     const { data } = await axios.get(`${url}/posts/mypost`, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.authorization}`,
+  //       },
+  //     });
 
-  const fetchPost = async () => {
-    try {
-      console.log("MASUK SINI");
-      const { data } = await axios.get(`${url}/posts/mypost`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.authorization}`,
-        },
-      });
+  //     setPost(data.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-      setPost(data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { myposts, loading, error } = useSelector((state) => state.myposts);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    //otomatis, lifecycle seperti hook tidak perlu di panggil.ini adalah mounting
-    fetchPost();
+    dispatch(fetchMyPost());
   }, []);
 
   return (
     <>
-      {post?.length === 0 ? (
+      {myposts?.length === 0 ? (
         <div className="flex flex-row justify-center items-center py-[100px]">
           <span className="flex justify-center text-gray-500">
             You don't have any post
@@ -36,7 +37,7 @@ const MyPostPage = () => {
         </div>
       ) : (
         <div className="pt-10 px-24 flex flex-row flex-wrap bg-white justify-center">
-          {post.map((el) => {
+          {myposts.map((el) => {
             return (
               <div className="m-2 border-2 border-gray-500 shadow bg-white rounded w-1/3 p-4 shadow transition-transform duration-300 hover:border-red-500">
                 <div className="flex">
