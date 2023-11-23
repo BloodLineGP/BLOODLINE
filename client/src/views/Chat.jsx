@@ -1,96 +1,119 @@
-import { useEffect, useState, useRef } from "react";
-import { io } from "socket.io-client";
-import { axios } from "axios";
-const server_url = "http://localhost:3000";
+import React from "react";
+import {
+    Navbar,
+    Collapse,
+    Typography,
+    IconButton,
+    Button,
+} from "@material-tailwind/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-function Chats() {
-
-    const [data, setData] = useState("");
-
-    //hhtp pull
-    const [axiosResponse, setAxiosResponse] = useState({});
-    //http push with connection
-    const [socketConnection, setsocketConnection] = useState();
-
-    const [socketResponse, setsocketResponse] = useState()
-
-    const [inputText, setinputText] = useState()
-
-    const [socketCounter, setsocketCounter] = useState()
-
-    useEffect(() => {
-        const fetchWithAxios = async () => {
-            try {
-                const { data } = await axiosResponse.get(server_url);
-                console.log(data);
-                setAxiosResponse(data);
-            } catch (error) {}
-        };
-        fetchWithAxios();
-    }, []);
-
-    useEffect(() => {
-        const socket = io("http://localhost:3000");
-        setsocketConnection(socket);
-        return () => {
-            socketConnection?.disconnect();
-        };
-    }, []);
-
-    useEffect(() => {
-        //butuh sebuah handler di argument kedua, tidak perlu sebuah data. 
-        const responseTimer = (response)=>{
-            setsocketConnection(response)
-        }
-        socketConnection?.on('an_event_counter',responseTimer)
-    }, [socketConnection]);
-
-    // console.log(socketConnection);
-    const handleEmitWithoutResponse = () => {
-        socketConnection.emit("an_event", "from client");
-    };
-
-    const handleEmitWithResponse = ()=>{
-        socketConnection.emit('an_event_with_response',(data)=>{
-            socket.emit("re")
-        })
-    }
-
+function NavList() {
     return (
-        <div>
-            <div className="text-left bg-gray-100 rounded shadow-lg p-4 px-4 md:p-8 mb-6  max-w-lg">
-                {/* {this is ChatScreen} */}
-                <div className="bg-gray-300 rounded p-4 px-4 md:p-8 mb-6  max-w-lg">
-                    Chat here
-                </div>
-                <div className=" text-right bg-gray-500 rounded p-4 px-4 md:p-8 mb-6  max-w-lg">
-                    hello
-                </div>
-                {/* {this is textarea} */}
-                <form>
-                    <label>Message</label>
-                    <input type="text" />
-                    <button type="submit">Send</button>
-                </form>
-            </div>
-            {/* {CLIENT REQUEST with AXIOS to SERVER} */}
-            <h2>Axios Response</h2>
-            <h2>{JSON.stringify(axiosResponse, null, 2)}</h2>
-
-            {/* {CLIENT EMIT WITHOUT RESPONSE FROM SERVER} */}
-            <h2>{}</h2>
-            <button onClick={handleEmitWithoutResponse}>Emit</button>
-
-            {/* {CLIENT EMIT WITH RESPONSE FROM SERVER} */}
-            <h2>Socket With Response</h2>
-            <input type="text"
-            onChange={} />
-            <button></button>
-            <p></p>
-        </div>
+        <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-medium"
+            >
+                <a
+                    href="#"
+                    className="flex items-center hover:text-blue-500 transition-colors"
+                >
+                    Pages
+                </a>
+                <Button />
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-medium"
+            >
+                <a
+                    href="#"
+                    className="flex items-center hover:text-blue-500 transition-colors"
+                >
+                    Account
+                </a>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-medium"
+            >
+                <a
+                    href="#"
+                    className="flex items-center hover:text-blue-500 transition-colors"
+                >
+                    Blocks
+                </a>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-medium"
+            >
+                <a
+                    href="#"
+                    className="flex items-center hover:text-blue-500 transition-colors"
+                >
+                    Docs
+                </a>
+            </Typography>
+        </ul>
     );
 }
 
+export function NavbarSimple() {
+    const [openNav, setOpenNav] = React.useState(false);
 
-export default Chats;
+    const handleWindowResize = () =>
+        window.innerWidth >= 960 && setOpenNav(false);
 
+    React.useEffect(() => {
+        window.addEventListener("resize", handleWindowResize);
+
+        return () => {
+            window.removeEventListener("resize", handleWindowResize);
+        };
+    }, []);
+
+    return (
+        <Navbar className="mx-auto max-w-screen-xl px-6 py-3">
+            <div className="flex items-center justify-between text-blue-gray-900">
+                <Typography
+                    as="a"
+                    href="#"
+                    variant="h6"
+                    className="mr-4 cursor-pointer py-1.5"
+                >
+                    Material Tailwind
+                </Typography>
+                <div className="hidden lg:block">
+                    <NavList />
+                </div>
+                <IconButton
+                    variant="text"
+                    className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+                    ripple={false}
+                    onClick={() => setOpenNav(!openNav)}
+                >
+                    {openNav ? (
+                        <XMarkIcon className="h-6 w-6" strokeWidth={2} />
+                    ) : (
+                        <Bars3Icon className="h-6 w-6" strokeWidth={2} />
+                    )}
+                </IconButton>
+            </div>
+            <Collapse open={openNav}>
+                <NavList />
+            </Collapse>
+        </Navbar>
+    );
+}
+
+export default NavList;

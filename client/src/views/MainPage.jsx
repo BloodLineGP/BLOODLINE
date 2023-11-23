@@ -1,13 +1,13 @@
+import Navbar2 from "../components/Navbar2";
 
-import Navbar from "../components/Navbar";
 import { Outlet } from "react-router-dom";
 const MainPage = () => {
-  return (
-    <>
-      <Navbar />
-      <Outlet />
-    </>
-  );
+    return (
+        <>
+            <Navbar2 />
 
+            <Outlet />
+        </>
+    );
 };
 export default MainPage;
