@@ -1,9 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counter from "../features/counterSlice";
-import todos from "../features/todoSlice";
+import posts from "../features/post/post-slice";
+import myposts from "../features/post/myPost-slice";
+import donorposts from "../features/post/donorPost-slice";
+import requestposts from "../features/post/requestPost-slice";
 
 export default configureStore({
   reducer: {
-    counter,
+    posts,
+    myposts,
+    donorposts,
+    requestposts,
   },
 });

@@ -158,6 +158,7 @@ const DetailedPostPage = () => {
             </div>
         </>
     );
+
 };
 
 export default DetailedPostPage;

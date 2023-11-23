@@ -103,6 +103,7 @@ const CreatePost = () => {
                                         <p>Please fill out all the fields.</p>
                                     </div>
 
+<<<<<<< HEAD
                                     <div className="lg:col-span-2">
                                         <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div className="md:col-span-5">
@@ -271,6 +272,119 @@ const CreatePost = () => {
                                                     </select>
                                                 </div>
                                             </div>
+=======
+                  <div className="lg:col-span-2">
+                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                      <div className="md:col-span-5">
+                        <label htmlFor="name">Full Name</label>
+                        <input
+                          type="text"
+                          name="name"
+                          id="name"
+                          className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          defaultValue={name}
+                          onChange={nameChangeHandler}
+                          autoComplete="off"
+                        />
+                      </div>
+
+                      <div className="md:col-span-5">
+                        <label htmlFor="description">Description</label>
+                        <input
+                          type="text"
+                          name="description"
+                          id="description"
+                          className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          defaultValue={description}
+                          onChange={descriptionChangeHandler}
+                          autoComplete="off"
+                        />
+                      </div>
+
+                      <div className="md:col-span-3">
+                        <label htmlFor="bloodType">Blood Type</label>
+                        <select
+                          className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          id="bloodType"
+                          onChange={bloodTypeChangeHandler}
+                        >
+                          <option defaultValue="" hidden>
+                            -- Select Blood Type --
+                          </option>
+                          <option defaultValue="A+">A+</option>
+                          <option defaultValue="A-">A-</option>
+                          <option defaultValue="B+">B+</option>
+                          <option defaultValue="B-">B-</option>
+                          <option defaultValue="O+">O+</option>
+                          <option defaultValue="O-">O-</option>
+                          <option defaultValue="AB+">AB+</option>
+                          <option defaultValue="AB-">AB-</option>
+                        </select>
+                      </div>
+
+                      <div className="md:col-span-3">
+                        <label htmlFor="location">Location (Hospital)</label>
+                        <input
+                          type="text"
+                          name="location"
+                          id="location"
+                          className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          defaultValue={location}
+                          onChange={locationChangeHandler}
+                          autoComplete="off"
+                        />
+                      </div>
+
+                      <div className="md:col-span-3">
+                        <label htmlFor="contact">Contact</label>
+                        <input
+                          type="text"
+                          name="contact"
+                          id="contact"
+                          className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          defaultValue={contact}
+                          onChange={contactChangeHandler}
+                        />
+                      </div>
+
+                      <div className="md:col-span-3">
+                        <div>
+                          Post Type
+                          <select
+                            onChange={postTypeChangeHandler}
+                            name="postType"
+                            id="postType"
+                            className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          >
+                            <option defaultValue="" hidden>
+                              -- Select Type --
+                            </option>
+                            <option defaultValue="Request">AS RECIPIENT</option>
+                            <option defaultValue="Volunteer">AS DONOR</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="md:col-span-3">
+                        <div>
+                          Status (Scale of emergency)
+                          <select
+                            onChange={statusChangeHandler}
+                            name="status"
+                            id="status"
+                            className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          >
+                            <option defaultValue="" hidden>
+                              -- Select Status --
+                            </option>
+                            <option defaultValue="Urgent">Urgent</option>
+                            <option defaultValue="Scheduled within 7 days">
+                              Scheduled within 7 days
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+>>>>>>> 788de98a810f36dc1b316513f2b6603074114695
 
                                             <div className="md:col-span-5 text-right">
                                                 <div className="inline-flex items-end">
@@ -286,9 +400,19 @@ const CreatePost = () => {
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
             </form>
         </>
     );
+=======
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </>
+  );
+>>>>>>> 788de98a810f36dc1b316513f2b6603074114695
 };
 
 export default CreatePost;
