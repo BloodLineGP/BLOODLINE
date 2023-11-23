@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.1",
     "express": "^4.18.2",
+    "firebase-tools": "^12.9.1",
     "react": "^18.2.0",
     "react-chat-engine": "^1.11.28",
     "react-chat-engine-advanced": "^0.1.28",
