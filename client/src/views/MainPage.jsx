@@ -8,5 +8,6 @@ const MainPage = () => {
       <Outlet />
     </>
   );
+
 };
 export default MainPage;

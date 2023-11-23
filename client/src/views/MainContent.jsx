@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPost } from "../features/post/post-slice";
 
 const MainContent = () => {
+
   // const [post, setPost] = useState([]);
   // const fetchPost = async () => {
   //   try {
