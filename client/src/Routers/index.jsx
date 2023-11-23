@@ -13,8 +13,6 @@ import MyPostPage from "../views/MyPostPage";
 import RequestPostPage from "../views/RequestPostPage";
 import DonorPostPage from "../views/DonorPostPage";
 
-import Join from "../views/join";
-
 const router = createBrowserRouter([
     {
         path: "*",

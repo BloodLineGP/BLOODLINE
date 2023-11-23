@@ -4,21 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPost } from "../features/post/post-slice";
 import Banner from "../components/Banner";
 const MainContent = () => {
-    // const [post, setPost] = useState([]);
-    // const fetchPost = async () => {
-    //   try {
-    //     const { data } = await axios.get(`${url}/posts`, {
-    //       headers: {
-    //         Authorization: `Bearer ${localStorage.authorization}`,
-    //       },
-    //     });
-
-    //     setPost(data.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-
     const { posts, loading, error } = useSelector((state) => state.posts);
     const dispatch = useDispatch();
 
