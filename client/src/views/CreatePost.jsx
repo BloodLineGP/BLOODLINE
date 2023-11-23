@@ -102,7 +102,7 @@ const CreatePost = () => {
                   <div className="lg:col-span-2">
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                       <div className="md:col-span-5">
-                        <label for="name">Full Name</label>
+                        <label htmlFor="name">Full Name</label>
                         <input
                           type="text"
                           name="name"
@@ -115,7 +115,7 @@ const CreatePost = () => {
                       </div>
 
                       <div className="md:col-span-5">
-                        <label for="description">Description</label>
+                        <label htmlFor="description">Description</label>
                         <input
                           type="text"
                           name="description"
@@ -128,13 +128,13 @@ const CreatePost = () => {
                       </div>
 
                       <div className="md:col-span-3">
-                        <label for="bloodType">Blood Type</label>
+                        <label htmlFor="bloodType">Blood Type</label>
                         <select
                           className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           id="bloodType"
                           onChange={bloodTypeChangeHandler}
                         >
-                          <option defaultValue="" selected hidden>
+                          <option defaultValue="" hidden>
                             -- Select Blood Type --
                           </option>
                           <option defaultValue="A+">A+</option>
@@ -149,7 +149,7 @@ const CreatePost = () => {
                       </div>
 
                       <div className="md:col-span-3">
-                        <label for="location">Location (Hospital)</label>
+                        <label htmlFor="location">Location (Hospital)</label>
                         <input
                           type="text"
                           name="location"
@@ -162,7 +162,7 @@ const CreatePost = () => {
                       </div>
 
                       <div className="md:col-span-3">
-                        <label for="contact">Contact</label>
+                        <label htmlFor="contact">Contact</label>
                         <input
                           type="text"
                           name="contact"
@@ -182,7 +182,7 @@ const CreatePost = () => {
                             id="postType"
                             className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           >
-                            <option defaultValue="" selected hidden>
+                            <option defaultValue="" hidden>
                               -- Select Type --
                             </option>
                             <option defaultValue="Request">AS RECIPIENT</option>
@@ -200,7 +200,7 @@ const CreatePost = () => {
                             id="status"
                             className="border-gray-300 h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           >
-                            <option defaultValue="" selected hidden>
+                            <option defaultValue="" hidden>
                               -- Select Status --
                             </option>
                             <option defaultValue="Urgent">Urgent</option>
@@ -228,7 +228,6 @@ const CreatePost = () => {
       </form>
     </>
   );
-
 };
 
 export default CreatePost;

@@ -1,6 +1,8 @@
 const errorHandler = (err, req, res, next) => {
-    let status = 500;
-    let message = "Internal Server Error";
+
+  let status = 500;
+  let message = "Internal Server Error";
+
 
     if (err.name === "SequelizeValidationError") {
         status = 400;
@@ -72,7 +74,14 @@ const errorHandler = (err, req, res, next) => {
         message = "Data not found";
     }
 
-    res.status(status).json({ message });
+
+  if (err.message == "Post not found") {
+    status = 404;
+    message = "Post not found";
+  }
+
+  res.status(status).json({ message });
+
 };
 
 module.exports = errorHandler;
