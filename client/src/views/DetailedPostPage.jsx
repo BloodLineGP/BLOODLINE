@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import axios from "axios";
 
 import {
@@ -12,6 +11,7 @@ import {
 import "../css/chat.css";
 
 const DetailedPostPage = () => {
+    //Chat Engine Propping API
     const chatProps = useMultiChatLogic(
         "4e57beba-716a-4601-9884-a08a419f9fc2",
         localStorage.loggedUser,
@@ -22,8 +22,6 @@ const DetailedPostPage = () => {
     const server_url = "http://localhost:3000";
 
     const [post, setPost] = useState({});
-
-    const [name, setName] = useState(localStorage.loggedUser);
 
     useEffect(() => {
         console.log(localStorage.loggedUser, `USER YG LOGIN`);
@@ -100,65 +98,78 @@ const DetailedPostPage = () => {
     };
     return (
         <>
-            <div className="min-h-screen p-6 bg-gray-300 flex space-x-4 flex-cols">
-                <div className="text-left flex items-stretch bg-gray-100 rounded shadow-lg p-4 px-4 md:p-8 mb-6  max-w-lg">
-                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-1 self-auto">
-                        <div className="text-gray-600">
-                            <p
-                                key={post.id}
-                                className="font-medium text-lg text-red-500"
+            <div>
+                <div className="min-h-screen p-6 bg-gray-300 flex space-x-4 flex-cols">
+                    <div className="text-left flex items-stretch bg-gray-100 rounded shadow-lg p-4 px-4 md:p-8 mb-6  max-w-lg">
+                        <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-1 self-auto">
+                            <div className="text-gray-600">
+                                <p
+                                    key={post.id}
+                                    className="font-medium text-lg text-red-500"
+                                >
+                                    Post Details {post.name}
+                                </p>
+                            </div>
+                            <div className="text-gray-600">
+                                <p className="text-lg">
+                                    Full Name: {post.name}
+                                </p>
+                            </div>
+                            <div className="text-gray-600">
+                                <p className=" text-lg">
+                                    Description: {post.description}
+                                </p>
+                            </div>
+                            <div className="text-gray-600">
+                                <p className=" text-lg">
+                                    BloodType: {post.bloodType}
+                                </p>
+                            </div>
+                            <div className="text-gray-600">
+                                <p className=" text-lg">Status:{post.status}</p>
+                            </div>
+                            <div className="text-gray-600">
+                                <p className=" text-lg">
+                                    Published Date:{post.publishDate}
+                                </p>
+                            </div>
+                            <div className="text-gray-600">
+                                <p className=" text-lg">
+                                    Location:{post.location}
+                                </p>
+                            </div>
+                            <div className="text-gray-600">
+                                <p className=" text-lg">
+                                    Contact:{post.contact}
+                                </p>
+                            </div>
+                            <div className="text-gray-600">
+                                <p className=" text-lg">
+                                    Post Type:{post.postType}
+                                </p>
+                            </div>
+                            <button
+                                onClick={createRoom}
+                                className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 border border-red-500 rounded"
                             >
-                                Post Details {post.name}
-                            </p>
+                                Chat
+                            </button>
                         </div>
-                        <div className="text-gray-600">
-                            <p className="text-lg">Full Name: {post.name}</p>
-                        </div>
-                        <div className="text-gray-600">
-                            <p className=" text-lg">
-                                Description: {post.description}
-                            </p>
-                        </div>
-                        <div className="text-gray-600">
-                            <p className=" text-lg">
-                                BloodType: {post.bloodType}
-                            </p>
-                        </div>
-                        <div className="text-gray-600">
-                            <p className=" text-lg">Status:{post.status}</p>
-                        </div>
-                        <div className="text-gray-600">
-                            <p className=" text-lg">
-                                Published Date:{post.publishDate}
-                            </p>
-                        </div>
-                        <div className="text-gray-600">
-                            <p className=" text-lg">Location:{post.location}</p>
-                        </div>
-                        <div className="text-gray-600">
-                            <p className=" text-lg">Contact:{post.contact}</p>
-                        </div>
-                        <div className="text-gray-600">
-                            <p className=" text-lg">
-                                Post Type:{post.postType}
-                            </p>
-                        </div>
-                        <button
-                            onClick={createRoom}
-                            className="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 border border-red-500 rounded"
-                        >
-                            Chat
-                        </button>
+                    </div>
+                    <div className="w-full">
+                        <MultiChatWindow {...chatProps} />
+                        <MultiChatSocket {...chatProps} />
                     </div>
                 </div>
-                <div className="w-full">
-                    <MultiChatWindow {...chatProps} />
-                    <MultiChatSocket {...chatProps} />
-                </div>
             </div>
+
+            {/* <div className="text-[200px] bg-blue-800 box-content w-20 h-20 pt-[10px]">
+                <GoogleMap mapContainerStyle={{ width: 100, height: 100 }}>
+                    MAP HERE
+                </GoogleMap>
+            </div> */}
         </>
     );
-
 };
 
 export default DetailedPostPage;

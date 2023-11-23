@@ -8,7 +8,7 @@ import DetailedPostPage from "../views/DetailedPostPage";
 import RegistrationPage from "../views/RegistrationPage";
 import LoginPage from "../views/LoginPage";
 import CreatePost from "../views/CreatePost";
-
+import MappingSystem from "../views/mapping";
 import MyPostPage from "../views/MyPostPage";
 import RequestPostPage from "../views/RequestPostPage";
 import DonorPostPage from "../views/DonorPostPage";
@@ -77,10 +77,9 @@ const router = createBrowserRouter([
                 path: "/posts/donor",
                 element: <DonorPostPage />,
             },
-
             {
-                path: "/join",
-                element: <Join />,
+                path: "/map",
+                element: <MappingSystem />,
             },
         ],
     },

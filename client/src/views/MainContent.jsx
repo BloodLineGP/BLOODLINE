@@ -15,7 +15,9 @@ const MainContent = () => {
 
     return (
         <>
-            <Banner />
+            <div className="flex flex-row justify-around object-fill">
+                <Banner />
+            </div>
             <div className="pt-[200px] px-24 flex flex-row flex-wrap bg-white justify-center pt-">
                 {posts.map((el) => {
                     return (
