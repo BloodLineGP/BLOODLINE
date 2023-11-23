@@ -1,96 +1,116 @@
-import { useEffect, useState, useRef } from "react";
-import { io } from "socket.io-client";
-import { axios } from "axios";
-const server_url = "http://localhost:3000";
+import React, { useState } from "react";
+import {
+    Container,
+    Typography,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    TextField,
+    Button,
+    Grid,
+} from "@mui/material";
 
-function Chats() {
+const BloodDonorRecipientForm = () => {
+    const [userType, setUserType] = useState("donor"); // Default to donor
+    const [formData, setFormData] = useState({
+        name: "",
+        bloodType: "",
+        lastDonationDate: "",
+        hospitalName: "",
+    });
 
-    const [data, setData] = useState("");
-
-    //hhtp pull
-    const [axiosResponse, setAxiosResponse] = useState({});
-    //http push with connection
-    const [socketConnection, setsocketConnection] = useState();
-
-    const [socketResponse, setsocketResponse] = useState()
-
-    const [inputText, setinputText] = useState()
-
-    const [socketCounter, setsocketCounter] = useState()
-
-    useEffect(() => {
-        const fetchWithAxios = async () => {
-            try {
-                const { data } = await axiosResponse.get(server_url);
-                console.log(data);
-                setAxiosResponse(data);
-            } catch (error) {}
-        };
-        fetchWithAxios();
-    }, []);
-
-    useEffect(() => {
-        const socket = io("http://localhost:3000");
-        setsocketConnection(socket);
-        return () => {
-            socketConnection?.disconnect();
-        };
-    }, []);
-
-    useEffect(() => {
-        //butuh sebuah handler di argument kedua, tidak perlu sebuah data. 
-        const responseTimer = (response)=>{
-            setsocketConnection(response)
-        }
-        socketConnection?.on('an_event_counter',responseTimer)
-    }, [socketConnection]);
-
-    // console.log(socketConnection);
-    const handleEmitWithoutResponse = () => {
-        socketConnection.emit("an_event", "from client");
+    const handleUserTypeChange = (event) => {
+        setUserType(event.target.value);
     };
 
-    const handleEmitWithResponse = ()=>{
-        socketConnection.emit('an_event_with_response',(data)=>{
-            socket.emit("re")
-        })
-    }
+    const handleChange = (event) => {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value,
+        });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Add your form submission logic here
+        console.log("Form submitted:", userType, formData);
+        // You may want to make an API call to handle form submission
+    };
 
     return (
-        <div>
-            <div className="text-left bg-gray-100 rounded shadow-lg p-4 px-4 md:p-8 mb-6  max-w-lg">
-                {/* {this is ChatScreen} */}
-                <div className="bg-gray-300 rounded p-4 px-4 md:p-8 mb-6  max-w-lg">
-                    Chat here
-                </div>
-                <div className=" text-right bg-gray-500 rounded p-4 px-4 md:p-8 mb-6  max-w-lg">
-                    hello
-                </div>
-                {/* {this is textarea} */}
-                <form>
-                    <label>Message</label>
-                    <input type="text" />
-                    <button type="submit">Send</button>
-                </form>
-            </div>
-            {/* {CLIENT REQUEST with AXIOS to SERVER} */}
-            <h2>Axios Response</h2>
-            <h2>{JSON.stringify(axiosResponse, null, 2)}</h2>
+        <Container maxWidth="sm">
+            <Typography variant="h4" align="center" gutterBottom>
+                Blood Donor and Recipient App
+            </Typography>
+            <form onSubmit={handleSubmit}>
+                <FormControl fullWidth margin="normal">
+                    <InputLabel>User Type</InputLabel>
+                    <Select value={userType} onChange={handleUserTypeChange}>
+                        <MenuItem value="donor">Donor</MenuItem>
+                        <MenuItem value="recipient">Recipient</MenuItem>
+                    </Select>
+                </FormControl>
 
-            {/* {CLIENT EMIT WITHOUT RESPONSE FROM SERVER} */}
-            <h2>{}</h2>
-            <button onClick={handleEmitWithoutResponse}>Emit</button>
+                <TextField
+                    fullWidth
+                    label="Name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    margin="normal"
+                    required
+                />
 
-            {/* {CLIENT EMIT WITH RESPONSE FROM SERVER} */}
-            <h2>Socket With Response</h2>
-            <input type="text"
-            onChange={} />
-            <button></button>
-            <p></p>
-        </div>
+                <TextField
+                    fullWidth
+                    label="Blood Type"
+                    name="bloodType"
+                    value={formData.bloodType}
+                    onChange={handleChange}
+                    margin="normal"
+                    required
+                />
+
+                {userType === "donor" && (
+                    <TextField
+                        fullWidth
+                        label="Last Donation Date"
+                        type="date"
+                        name="lastDonationDate"
+                        value={formData.lastDonationDate}
+                        onChange={handleChange}
+                        margin="normal"
+                        required
+                    />
+                )}
+
+                {userType === "recipient" && (
+                    <TextField
+                        fullWidth
+                        label="Hospital Name"
+                        name="hospitalName"
+                        value={formData.hospitalName}
+                        onChange={handleChange}
+                        margin="normal"
+                        required
+                    />
+                )}
+
+                <Grid container justifyContent="center" spacing={2}>
+                    <Grid item>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                        >
+                            Submit
+                        </Button>
+                    </Grid>
+                </Grid>
+            </form>
+        </Container>
     );
-}
+};
 
-
-export default Chats;
-
+export default BloodDonorRecipientForm;
