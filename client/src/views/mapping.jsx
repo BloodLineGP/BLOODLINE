@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
     GoogleMap,
     useLoadScript,
-    Marker,
+    useJsApiLoader,
+    MarkerF,
     InfoWindow,
 } from "@react-google-maps/api";
 
@@ -19,12 +20,16 @@ const center = {
 };
 
 export default function MappingHospital() {
-    const { isLoaded, loadError } = useLoadScript({
+    const { isLoaded, loadError } = useJsApiLoader({
         googleMapsApiKey: `AIzaSyCynpdKuFatSNzyrTnNhq6PisrMZz1EngQ`,
+        id: "google-map-script",
         libraries,
     });
 
-    const [markers, setMarkers] = React.useState([]);
+    const [markers, setMarkers] = useState([]);
+    useEffect(() => {
+        console.log(markers);
+    });
     if (loadError) return "Error loading maps";
     if (!isLoaded) return "Loading Maps";
 
@@ -41,23 +46,29 @@ export default function MappingHospital() {
                 zoom={8}
                 center={center}
                 onClick={(event) => {
-                    setMarkers((current) => [
-                        ...current,
+                    setMarkers([
+                        ...markers,
                         {
                             lat: event.latLng.lat(),
                             lng: event.latLng.lng(),
                             time: new Date(),
                         },
                     ]);
+                    console.log(event.latLng.lat(), `>>>>>ini latitude`);
+                    console.log(event.latLng.lng(), `ini`);
                 }}
             >
-                {markers.map((marker) => {
-                    <Marker
-                        key={marker.time.toISOString()}
-                        position={{ lat: marker.lat, lng: marker.lng }}
-                    />;
-                })}
+                {markers.length > 0 &&
+                    markers?.map((marker) => {
+                        return (
+                            <MarkerF
+                                key={marker.time.toISOString()}
+                                position={{ lat: marker.lat, lng: marker.lng }}
+                            />
+                        );
+                    })}
             </GoogleMap>
+            {console.log(markers)}
         </div>
     );
 }
