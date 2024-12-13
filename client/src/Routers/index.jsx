@@ -78,10 +78,10 @@ const router = createBrowserRouter([
                 element: <DonorPostPage />,
             },
 
-            {
-                path: "/join",
-                element: <Join />,
-            },
+            // {
+            //     path: "/join",
+            //     element: <Join />,
+            // },
         ],
     },
 ]);
